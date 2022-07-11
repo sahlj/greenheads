@@ -112,7 +112,7 @@ class Race {
                 if (this.stroke !== Stroke.IndividualMedley) {
                     return true;
                 } else {
-                    alert("50 is not a valid IM distance");
+                    alert(`${this.eventDescription()} is not a valid event`);
                     return false;
                 }
                 break;
@@ -123,7 +123,7 @@ class Race {
             case 100:
                 // 100 IM is not valid in a long course pool
                 if (this.course == Course.LCM && this.stroke == Stroke.IndividualMedley) {
-                    alert("100L Individual Medley is not an event");
+                    alert(`${this.eventDescription()} is not a valid event`);
                     return false;
                 } else {
                     return true;
@@ -134,17 +134,17 @@ class Race {
                 if (this.stroke === Stroke.IndividualMedley || (this.course !== Course.SCY && this.stroke === Stroke.Freestyle)) {
                     return true;
                 } else {
-                    alert(`400 ${this.stroke} is not a valid ${this.course} event`);
+                    alert(`${this.eventDescription()} is not a valid event`);
                     return false;
                 }
                 break;
-            case 1000:
+            case 800:
             case 1500:
                 // These are only valid SCM/LCM freestyle events
-                if (this.stroke === Stroke.Freestyle && (this.course === Course.SCM || this.course === Course.LCM)) {
+                if (this.stroke === Stroke.Freestyle && (this.course != Course.SCY)) {
                     return true;
                 } else {
-                    alert(`${this.distance} ${this.stroke} is not a valid ${this.course} event`);
+                    alert(`${this.eventDescription()} is not a valid event`);
                     return false;                   
                 }
             case 500:
@@ -154,7 +154,7 @@ class Race {
                 if (this.stroke === Stroke.Freestyle && this.course === Course.SCY) {
                     return true;
                 } else {
-                    alert(`${this.distance} ${this.stroke} is not a valid ${this.course} event`);
+                    alert(`${this.eventDescription()} is not a valid event`);
                     return false;
                 }
                 break;           
@@ -166,7 +166,11 @@ class Race {
     }
 
     resultValue() {
-        return this.gender + " " + this.distance.toString() + this.course + " " + this.stroke + " - " + this.time;
+        return this.eventDescription() + " - " + this.time;
+    }
+
+    eventDescription() {
+        return this.gender + " " + this.distance.toString() + this.course + " " + this.stroke;
     }
 
     shortCourseConversion(course) {
@@ -241,7 +245,7 @@ class Race {
         // 100 IM does not exist in long course
         if (this.stroke == Stroke.IndividualMedley && this.distance == 100 &&
             (this.course == Course.LCM || course == Course.LCM)) {
-            alert("100 IM is not a valid long course event");
+            alert(`${this.eventDescription()} is not a valid event`);
             return undefined;
         }
 
@@ -282,12 +286,12 @@ class Race {
             alert("NFHS does not have a conversion for long course meets");
             return undefined;
         }
-        if (this.course == course) return this;
         let factor  = Race.NFHS_FACTOR_MAP.get(this.gender).get(this.stroke).get(this.distance);
         if (factor == undefined) {
-            alert(`${this.distance}${this.course} ${this.stroke} is not a valid NFHS event`);
+            alert(`${this.eventDescription()} is not a valid NFHS event`);
             return undefined;
         }
+        if (this.course == course) return this;
         let race = new Race(this.gender, this.course == Course.SCY ? Course.SCM : Course.SCY, this.stroke, this.distance);
         if (race.distance == 500) race.distance = 400;
         else if(race.distance == 400) race.distance = 500;
