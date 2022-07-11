@@ -191,6 +191,8 @@ class Race {
                 if (this.stroke == Stroke.Freestyle) {
                     newDistance = 500;
                     factor = DISTANCE_FACTOR;
+                } else if (this.stroke == Stroke.IndividualMedley) {
+                    factor = SHORT_COURSE_FACTOR;
                 }
                 break;
             case 800:
