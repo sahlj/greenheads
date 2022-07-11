@@ -4,7 +4,7 @@
         <script src="./SwimConverter.js"></script>
         <table width="500" border="0" cellspacing="0" cellpadding="2" align="center" bgcolor="#58B33C" >
             <form name="form">
-                <tr><th colspan="4">Swim Time Conversion</th></tr>
+                <tr><th colspan="5">Swim Time Conversion</th></tr>
                 <tr><td>&nbsp</td></tr>
                 <tr>
                     <td align="right">Organization:</td>
@@ -17,6 +17,7 @@
                 </tr>
                 <tr>
                     <th colspan="2">Input</th>
+                    <th>&nbsp</th>
                     <th colspan="2">Output</th> 
                 </tr>
                 <tr>
@@ -29,7 +30,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">Event:</td>
+                    <td align="right">Stroke:</td>
                     <td align="left">
                         <select size="1" name="Fevent" class="form" tabindex="2">
                             <option selected>Freestyle</option>
@@ -39,6 +40,7 @@
                             <option>Individual Medley</option>
                         </select>
                     </td>
+                    <td>&nbsp</td>
                     <td align="right">Stroke:</td>
                     <td align="left">
                         <input name="destStroke" size="4" value="" class="form" disabled>
@@ -59,6 +61,7 @@
                             <option>1650</option>
                         </select>
                     </td>
+                    <td>&nbsp</td>
                     <td align="right">Distance:</td>
                     <td align="left">
                         <input name="destDistance" size="4" value="" class="form" disabled>
@@ -73,6 +76,7 @@
                             <option value="L">LCM</option>
                         </select>
                     </td>
+                    <td>&nbsp</td>
                     <td align="right">Course:</td>
                     <td align="left">
                         <select size="1" name="FoutputCourse" class="form" tabindex="6">
@@ -82,11 +86,17 @@
                         </select>
                     </td>
                 </tr>
+                <tr><td>&nbsp</td></tr>
+                <tr>
+                    <td>&nbsp</td>
+                    <td colspan="4">Include leading zeros - e.g. "01:52.49"</td>
+                </tr>
                 <tr>
                     <td align="right">Time:</td>
                     <td align="left">
                         <input name="sourceTime" size="4" value="00:00.00" class="form" tabindex="5">
                     </td>
+                    <td>&nbsp</td>
                     <td align="right">Time:</td>
                     <td align="left">
                         <input name="destTime" size="4" value="" class="form" disabled>
