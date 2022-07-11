@@ -188,8 +188,10 @@ class Race {
                 factor = SHORT_COURSE_FACTOR;
                 break;
             case 400:
-                if (this.stroke == Stroke.Freestyle) newDistance = 500;
-                factor = DISTANCE_FACTOR;
+                if (this.stroke == Stroke.Freestyle) {
+                    newDistance = 500;
+                    factor = DISTANCE_FACTOR;
+                }
                 break;
             case 800:
                 newDistance = 1000;
@@ -385,6 +387,10 @@ function processConversion() {
                 document.form.destStroke.value = newRace.stroke;
                 document.form.destDistance.value = newRace.distance;
                 document.form.destTime.value = newRace.time;
+            } else {
+                document.form.destStroke.value = "";
+                document.form.destDistance.value = "";
+                document.form.destTime.value = "";
             }
         }
     }
