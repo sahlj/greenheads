@@ -280,7 +280,10 @@ class Race {
         }
         if (this.course == course) return this;
         let factor  = Race.NFHS_FACTOR_MAP.get(this.gender).get(this.stroke).get(this.distance);
-        if (factor == undefined) return undefined;
+        if (factor == undefined) {
+            alert(`${this.distance}${this.course} ${this.stroke} is not a valid NFHS event`);
+            return undefined;
+        }
         let race = new Race(this.gender, this.course == Course.SCY ? Course.SCM : Course.SCY, this.stroke, this.distance);
         if (race.distance == 500) race.distance = 400;
         else if(race.distance == 400) race.distance = 500;
