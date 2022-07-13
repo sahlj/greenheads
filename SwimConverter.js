@@ -8,7 +8,8 @@ const Gender = {
 
 const Organization = {
     USAS: 'USAS',
-    NFHS: 'NFHS'
+    NFHS: 'NFHS',
+    NCAA: 'NCAA'
 }; // Organization
 
 const Stroke = {
@@ -163,7 +164,7 @@ class Race {
                 return false;
         }
         return true;
-    }
+    } // isValid
 
     resultValue() {
         return this.eventDescription() + " - " + this.time;
@@ -304,6 +305,55 @@ class Race {
 
     } // convertNFHS
 
+    convertNCAA(course) {
+        if (!this.isValid()) return undefined;
+        if (this.course == Course.LCM || course == Course.LCM) {
+            alert("NCAA does not have a conversion for long course meets");
+            return undefined;
+        }
+        if (course == this.course) return this;
+        let factor = 0.906;
+        let distance = this.distance;
+        if (this.stroke == Stroke.Freestyle) {
+            switch (this.distance) {
+                case 400:
+                    factor = 1.153;
+                    distance = 500;
+                    break;
+                case 500:
+                    factor = 1.153;
+                    distance = 400;
+                case 800:
+                    factor = 1.153;
+                    distance = 1000;
+                case 1000:
+                    factor = 1.153;
+                    distance = 800;
+                    break;
+                case 1500:
+                    factor = 1.013;
+                    distance = 1650;
+                    break;
+                case 1650:
+                    factor = 1.013;
+                    distance = 1500;
+                    break;
+                default:
+                    break;
+            }
+        } // freestyle
+
+        let race = new Race(this.gender, course, this.stroke, distance);
+        let seconds = timeInSeconds(this.time);
+        let newSeconds = course == Course.SCY ? seconds * factor : seconds / factor;
+
+        // NCAA conversion does not round to hundredths - so we need to drop the subsequent digits
+        newSeconds = Math.floor(newSeconds * 100.0) / 100.0;
+        race.time = timeFromSeconds(newSeconds);
+        return race;
+
+    } // convertNCAA
+
 } // Race
 
 function timeInSeconds(time) {
@@ -384,6 +434,9 @@ function processConversion() {
                     break;
                 case Organization.USAS:
                     newRace = race.convertUSAS(outCourse);
+                    break;
+                case Organization.NCAA:
+                    newRace = race.convertNCAA(outCourse);
                     break;
                 default:
                     alert(`Invalid organization: ${org}`);
