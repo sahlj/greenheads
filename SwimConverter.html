@@ -6,7 +6,7 @@
         <table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" bgcolor="#58B33C" >
             <form name="form">
                 <tr>
-                    <th align="center" colspan="5"><h1>Swim Time Conversion</h1></th>
+                    <th align="center" colspan="3"><h1>Swim Time Conversion</h1></th>
                 </tr>
                 <tr><td>&nbsp</td></tr>
                 <tr>
@@ -21,8 +21,6 @@
                 </tr>
                 <tr>
                     <th colspan="2">Input</th>
-                    <th>&nbsp</th>
-                    <th colspan="2">Output</th> 
                 </tr>
                 <tr>
                     <td align="right">Division:</td>
@@ -30,24 +28,17 @@
                         <select size="1" name="Fgender" class="form" tabindex="2">
                             <option value="M" selected>Men's</option>
                             <option value="W">Women's</option>
-                        </selecte>
+                        </select>
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">Stroke:</td>
+                    <td align="right">Input Course:</td>
                     <td align="left">
-                        <select size="1" name="Fevent" class="form" tabindex="2">
-                            <option selected>Freestyle</option>
-                            <option>Backstroke</option>
-                            <option>Breaststroke</option>
-                            <option>Butterfly</option>
-                            <option>Individual Medley</option>
+                        <select size="1" name="FinputCourse" class="form" tabindex="4">
+                            <option value="Y" selected>SCY</option>
+                            <option value="S">SCM</option>
+                            <option value="L">LCM</option>
                         </select>
-                    </td>
-                    <td>&nbsp</td>
-                    <td align="right">Stroke:</td>
-                    <td align="left">
-                        <input name="destStroke" size=12" value="" class="form" disabled>
                     </td>
                 </tr>
                 <tr>
@@ -65,23 +56,31 @@
                             <option>1650</option>
                         </select>
                     </td>
-                    <td>&nbsp</td>
-                    <td align="right">Distance:</td>
+                </tr>
+                <tr>
+                    <td align="right">Stroke:</td>
                     <td align="left">
-                        <input name="destDistance" size="4" value="" class="form" disabled>
+                        <select size="1" name="Fevent" class="form" tabindex="2">
+                            <option selected>Freestyle</option>
+                            <option>Backstroke</option>
+                            <option>Breaststroke</option>
+                            <option>Butterfly</option>
+                            <option>Individual Medley</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>&nbsp</td></tr>
+                <tr>
+                    <td align="center" colspan="2"><i>Use leading 0's (eg "01:52.49")</i></td>
+                </tr>
+                <tr>
+                    <td align="right">Time:</td>
+                    <td align="left">
+                        <input name="sourceTime" size="4" value="00:00.00" class="form" tabindex="5">
                     </td>
                 </tr>
                 <tr>
-                    <td align="right">Course:</td>
-                    <td align="left">
-                        <select size="1" name="FinputCourse" class="form" tabindex="4">
-                            <option value="Y" selected>SCY</option>
-                            <option value="S">SCM</option>
-                            <option value="L">LCM</option>
-                        </select>
-                    </td>
-                    <td>&nbsp</td>
-                    <td align="right">Course:</td>
+                    <td align="right">Result Course:</td>
                     <td align="left">
                         <select size="1" name="FoutputCourse" class="form" tabindex="6">
                             <option value="Y">SCY</option>
@@ -93,29 +92,34 @@
                 <tr><td>&nbsp</td></tr>
                 <tr>
                     <td>&nbsp</td>
-                    <td colspan="4">Include leading zeros - e.g. "01:52.49"</td>
+                    <td align="left" >
+                        <input type="button" value="Convert" onClick="processConversion()" class="form" tabindex="7">
+                    </td>
+                </tr>
+                <tr><td>&nbsp</td></tr>
+                <tr>
+                    <th colspan="2">Output</th> 
                 </tr>
                 <tr>
-                    <td align="right">Time:</td>
+                    <td align="right">Distance:</td>
                     <td align="left">
-                        <input name="sourceTime" size="4" value="00:00.00" class="form" tabindex="5">
+                        <input name="destDistance" size="4" value="" class="form" disabled>
                     </td>
-                    <td>&nbsp</td>
+                </tr>
+                <tr>
+                    <td align="right">Stroke:</td>
+                    <td align="left">
+                        <input name="destStroke" size=12" value="" class="form" disabled>
+                    </td>
+                </tr>
+                <tr>
                     <td align="right">Time:</td>
                     <td align="left">
                         <input name="destTime" size="4" value="" class="form" disabled>
                     </td>
                 </tr>
                 <tr><td>&nbsp</td></tr>
-                <tr>
-                    <td>&nbsp</td>
-                    <td>&nbsp</td>
-                    <td>&nbsp</td>
-                    <td>
-                        <input type="button" value="Convert" onClick="processConversion()" class="form" tabindex="7">
-                    </td>
-                </tr>
-                <tr><td>&nbsp</td></tr>
+
             </form>
         </table>
         </font>
