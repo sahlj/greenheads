@@ -108,6 +108,12 @@ class Race {
         }
         console.log(`Course: ${this.course}; Stroke: ${this.stroke}; Distance: ${this.distance}`);
         switch (this.distance) {
+            case 25:
+                if (this.stroke == Stroke.IndividualMedley || this.course == Course.LCM) {
+                    return false;
+                } else {
+                    return true;
+                }
             case 50:
                 // Valid for all except Individual Medley
                 if (this.stroke !== Stroke.IndividualMedley) {
@@ -187,6 +193,7 @@ class Race {
         let factor = undefined;
         let newDistance = this.distance;
         switch (this.distance) {
+            case 25:
             case 50:
             case 100:
             case 200:
@@ -237,6 +244,10 @@ class Race {
 
     longAndShortConversion(course) {
         
+        if (this.distance == 25) {
+            alert("25 is an invalid long course distance");
+            return undefined;
+        }
         if (course == this.course) return this;
         if (course != Course.LCM && this.course != Course.LCM) {
             alert("Unexpected call");
@@ -307,6 +318,10 @@ class Race {
 
     convertNCAA(course) {
         if (!this.isValid()) return undefined;
+        if (this.distance == 25) {
+            alert(`Invalid NCAA Distance ${this.distance}`);
+            return undefined;
+        }
         if (this.course == Course.LCM || course == Course.LCM) {
             alert("NCAA does not have a conversion for long course meets");
             return undefined;
@@ -454,5 +469,3 @@ function processConversion() {
         }
     }
 }
-
-//export {timeInSeconds, timeFromSeconds, Race, Gender, Organization, Stroke, Course};
