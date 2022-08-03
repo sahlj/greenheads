@@ -1,5 +1,4 @@
 'use strict';
-const TIME_CHECK = "[0-9][0-9]:[0-9][0-9].[0-9][0-9]";
 
 const Gender = {
     MENS: "M",
@@ -102,18 +101,15 @@ class Race {
             alert("No gender specified");
             return false;
         }
-        if (this.time.match(TIME_CHECK) == null) {
+
+        let seconds = timeInSeconds(this.time);
+        if (isNaN(seconds)) {
             alert(`${this.time} is not a valid time representation, please enter as "MM:SS.HH"`);
             return false;
         }
+        console.log(`${this.time} represents ${seconds} seconds`);
         console.log(`Course: ${this.course}; Stroke: ${this.stroke}; Distance: ${this.distance}`);
         switch (this.distance) {
-            case 25:
-                if (this.stroke == Stroke.IndividualMedley || this.course == Course.LCM) {
-                    return false;
-                } else {
-                    return true;
-                }
             case 50:
                 // Valid for all except Individual Medley
                 if (this.stroke !== Stroke.IndividualMedley) {
@@ -193,7 +189,6 @@ class Race {
         let factor = undefined;
         let newDistance = this.distance;
         switch (this.distance) {
-            case 25:
             case 50:
             case 100:
             case 200:
@@ -244,10 +239,6 @@ class Race {
 
     longAndShortConversion(course) {
         
-        if (this.distance == 25) {
-            alert("25 is an invalid long course distance");
-            return undefined;
-        }
         if (course == this.course) return this;
         if (course != Course.LCM && this.course != Course.LCM) {
             alert("Unexpected call");
@@ -318,10 +309,6 @@ class Race {
 
     convertNCAA(course) {
         if (!this.isValid()) return undefined;
-        if (this.distance == 25) {
-            alert(`Invalid NCAA Distance ${this.distance}`);
-            return undefined;
-        }
         if (this.course == Course.LCM || course == Course.LCM) {
             alert("NCAA does not have a conversion for long course meets");
             return undefined;
@@ -372,8 +359,12 @@ class Race {
 } // Race
 
 function timeInSeconds(time) {
-    const timeVals = time.split(":");
-    return Number(timeVals[0]) * 60 + Number(timeVals[1]);
+    let timeNum = Number(time.replace(":",""));
+    console.log(`Converted ${time} to ${timeNum}`);
+    if (timeNum == undefined || timeNum == NaN) return NaN;
+    let seconds = (timeNum % 100) + (Math.floor(timeNum / 100) * 60);
+    console.log(`Returning ${seconds} seconds`);
+    return seconds;
 }
 
 function timeFromSeconds(time) {
@@ -469,3 +460,5 @@ function processConversion() {
         }
     }
 }
+
+//export {timeInSeconds, timeFromSeconds, Race, Gender, Organization, Stroke, Course};
