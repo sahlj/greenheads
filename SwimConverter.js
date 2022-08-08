@@ -449,6 +449,8 @@ function processConversion() {
                     break;
             }
             if (newRace && newRace.isValid()) {
+                let secs = timeInSeconds(race.time);
+                document.form.sourceTime.value = timeFromSeconds(secs);
                 document.form.destStroke.value = newRace.stroke;
                 document.form.destDistance.value = newRace.distance;
                 document.form.destTime.value = newRace.time;
@@ -457,6 +459,10 @@ function processConversion() {
                 document.form.destDistance.value = "";
                 document.form.destTime.value = "";
             }
+        } else {
+            document.form.destStroke.value = "";
+            document.form.destDistance.value = "";
+            document.form.destTime.value = "";
         }
     }
 }
