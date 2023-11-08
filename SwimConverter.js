@@ -184,8 +184,8 @@ class Race {
         if (course == this.course) return this;
 
         const SHORT_COURSE_FACTOR = 1.11;
-        const DISTANCE_FACTOR = 0.8925;
-        const MILE_FACTOR = 1.02;
+        const DISTANCE_FACTOR = 0.875;
+        const MILE_FACTOR = 1.006;
         let factor = undefined;
         let newDistance = this.distance;
         switch (this.distance) {
